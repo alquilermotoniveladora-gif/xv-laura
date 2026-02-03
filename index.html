@@ -2,127 +2,196 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>XV Laura Valentina</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: url("vestido-laura.jpg") no-repeat center center fixed;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+body{
+  margin:0;
+  font-family:'Georgia', serif;
+  background:#000;
+  color:#fff;
+  text-align:center;
+  overflow:hidden;
 }
 
-.overlay {
-    background: linear-gradient(
-        rgba(0, 80, 60, 0.85),
-        rgba(0, 40, 30, 0.9)
-    );
-    border: 2px solid gold;
-    border-radius: 20px;
-    padding: 25px;
-    max-width: 380px;
-    color: white;
-    text-align: center;
-    animation: fadeIn 2s ease;
+/* FONDO */
+.fondo{
+  position:fixed;
+  inset:0;
+  background:url('vestido-laura.jpg') center/contain no-repeat,
+             radial-gradient(circle,#0a3d2e,#000);
+  z-index:-1;
 }
 
-h1 {
-    color: gold;
-    margin: 10px 0;
+/* SOBRE */
+.sobre-container{
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#000;
+  z-index:10;
 }
 
-.countdown {
-    margin: 15px 0;
-    font-weight: bold;
-    color: #ffd700;
+.sobre{
+  width:260px;
+  height:170px;
+  background:linear-gradient(135deg,#d4af37,#9e7c19);
+  position:relative;
+  cursor:pointer;
+  animation:latir 2s infinite;
 }
 
-.btn {
-    display: inline-block;
-    margin: 8px;
-    padding: 10px 18px;
-    background: gold;
-    color: #004d3d;
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: bold;
+.sobre::before{
+  content:'';
+  position:absolute;
+  top:-85px;
+  left:0;
+  border-left:130px solid transparent;
+  border-right:130px solid transparent;
+  border-bottom:85px solid #e6c45a;
 }
 
-.colors span {
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    margin: 5px;
+.sobre h2{
+  position:absolute;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#000;
+  font-size:26px;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
+@keyframes latir{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.05)}
+}
+
+/* OCULTAR SOBRE */
+.sobre-container.oculto{
+  animation:desaparecer 1.5s forwards;
+}
+
+@keyframes desaparecer{
+  to{opacity:0; visibility:hidden}
+}
+
+/* TARJETA */
+.tarjeta{
+  margin:40px auto;
+  max-width:520px;
+  background:rgba(0,0,0,0.35);
+  border:2px solid #d4af37;
+  border-radius:25px;
+  padding:25px;
+  backdrop-filter: blur(4px);
+  animation:subir 2s ease forwards;
+}
+
+@keyframes subir{
+  from{opacity:0; transform:translateY(40px)}
+  to{opacity:1; transform:translateY(0)}
+}
+
+h1{color:#d4af37}
+.btn{
+  display:inline-block;
+  margin:10px;
+  padding:12px 22px;
+  background:#0a8f5c;
+  color:#fff;
+  border-radius:30px;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+/* MARIPOSAS */
+.mariposa{
+  position:absolute;
+  font-size:24px;
+  animation:volar 12s linear infinite;
+}
+
+@keyframes volar{
+  from{transform:translateY(100vh)}
+  to{transform:translateY(-120vh)}
 }
 </style>
 </head>
 
 <body>
 
-<div class="overlay">
-    <h3>MIS XV AÑOS</h3>
-    <h1>Laura Valentina</h1>
+<div class="fondo"></div>
 
-    <p>
-        Con la bendición de Dios y el amor de mis padres<br>
-        <strong>José Rodríguez & Ruby González</strong>
-    </p>
-
-    <p>
-        Hay momentos que se vuelven eternos cuando se viven con el corazón.<br>
-        Hoy inicio una nueva etapa de mi vida y sería un honor contar con tu presencia
-        para celebrar esta noche llena de magia, alegría y sueños.
-    </p>
-
-    <div class="countdown" id="contador"></div>
-
-    <a class="btn" href="https://chat.whatsapp.com/KAZB474qBDWFq7xxqZG111" target="_blank">
-        Confirmar asistencia
-    </a>
-
-    <a class="btn" href="https://maps.google.com/?q=Chinauta+Cundinamarca" target="_blank">
-        Ver ubicación
-    </a>
-
-    <p>💌 <strong>Lluvia de sobres</strong></p>
-
-    <p>Se reservan los colores</p>
-    <div class="colors">
-        <span style="background:#0b6b4f"></span>
-        <span style="background:gold"></span>
-        <span style="background:white"></span>
-        <span style="background:red"></span>
-    </div>
+<!-- SOBRE -->
+<div class="sobre-container" id="sobre">
+  <div class="sobre">
+    <h2>Mis 15 Años</h2>
+  </div>
 </div>
 
+<!-- TARJETA -->
+<div class="tarjeta">
+  <h1>Laura Valentina</h1>
+
+  <p>
+    Hay momentos que se vuelven eternos cuando se viven con el corazón.
+    Hoy inicio una nueva etapa de mi vida y sería un honor contar con tu presencia
+    para celebrar esta noche llena de magia, alegría y sueños.
+  </p>
+
+  <p><strong>José Rodríguez<br>Ruby González</strong></p>
+
+  <p><strong>Sábado 21 de marzo de 2026</strong><br>🕓 4:30 p.m.</p>
+
+  <div id="contador"></div>
+
+  <a class="btn" href="https://wa.me/573103289948" target="_blank">
+    Confirmar asistencia 💬
+  </a>
+
+  <a class="btn" href="https://www.google.com/maps?q=4.273662,-74.474662" target="_blank">
+    Ver ubicación 📍
+  </a>
+
+  <p>🎁 Lluvia de sobres</p>
+
+  <p>
+    Colores reservados:
+    🟢 🟡 ⚪ 🔴
+  </p>
+
+  <p><em>
+    Gracias por acompañarme en uno de los días más importantes de mi vida.
+  </em></p>
+</div>
+
+<!-- MARIPOSAS -->
+<div class="mariposa" style="left:10%">🦋</div>
+<div class="mariposa" style="left:40%">🦋</div>
+<div class="mariposa" style="left:70%">🦋</div>
+
 <script>
+/* ABRIR SOBRE */
+document.getElementById('sobre').onclick = ()=>{
+  document.getElementById('sobre').classList.add('oculto');
+};
+
+/* CONTADOR */
 const evento = new Date("March 21, 2026 16:30:00").getTime();
-
-setInterval(() => {
-    const ahora = new Date().getTime();
-    const diferencia = evento - ahora;
-
-    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-    const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
-    const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
-
-    document.getElementById("contador").innerHTML =
-        `⏳ ${dias} días ${horas}h ${minutos}m ${segundos}s`;
-}, 1000);
+setInterval(()=>{
+  const ahora = new Date().getTime();
+  const d = evento - ahora;
+  const dias = Math.floor(d/(1000*60*60*24));
+  const horas = Math.floor((d/(1000*60*60))%24);
+  const minutos = Math.floor((d/(1000*60))%60);
+  const segundos = Math.floor((d/1000)%60);
+  document.getElementById("contador").innerHTML =
+    `⏳ ${dias}d ${horas}h ${minutos}m ${segundos}s`;
+},1000);
 </script>
 
 </body>
 </html>
-  
