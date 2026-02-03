@@ -2,194 +2,208 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>XV Laura Valentina</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XV Laura Valentina</title>
 
 <style>
 body{
   margin:0;
-  font-family:'Georgia', serif;
-  background:#000;
-  color:#fff;
-  text-align:center;
+  font-family: 'Georgia', serif;
+  background: radial-gradient(circle, #0b3d2e, #021a13);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
   overflow:hidden;
 }
 
-/* FONDO */
-.fondo{
-  position:fixed;
-  inset:0;
-  background:url('vestido-laura.jpg') center/contain no-repeat,
-             radial-gradient(circle,#0a3d2e,#000);
-  z-index:-1;
-}
-
-/* SOBRE */
-.sobre-container{
-  position:fixed;
-  inset:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:#000;
-  z-index:10;
-}
-
+/* ===== SOBRE ===== */
 .sobre{
-  width:260px;
-  height:170px;
-  background:linear-gradient(135deg,#d4af37,#9e7c19);
+  width:280px;
+  height:180px;
+  background:#d4af37;
   position:relative;
   cursor:pointer;
-  animation:latir 2s infinite;
+  border-radius:8px;
+  box-shadow:0 15px 30px rgba(0,0,0,.5);
+  animation: flotar 3s infinite ease-in-out;
 }
 
 .sobre::before{
-  content:'';
+  content:"";
   position:absolute;
-  top:-85px;
-  left:0;
-  border-left:130px solid transparent;
-  border-right:130px solid transparent;
-  border-bottom:85px solid #e6c45a;
+  width:0;height:0;
+  border-left:140px solid transparent;
+  border-right:140px solid transparent;
+  border-top:90px solid #f1d27a;
+  top:0;left:0;
 }
 
-.sobre h2{
+.sobre span{
   position:absolute;
-  inset:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  color:#000;
-  font-size:26px;
-}
-
-@keyframes latir{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.05)}
-}
-
-/* OCULTAR SOBRE */
-.sobre-container.oculto{
-  animation:desaparecer 1.5s forwards;
-}
-
-@keyframes desaparecer{
-  to{opacity:0; visibility:hidden}
-}
-
-/* TARJETA */
-.tarjeta{
-  margin:40px auto;
-  max-width:520px;
-  background:rgba(0,0,0,0.35);
-  border:2px solid #d4af37;
-  border-radius:25px;
-  padding:25px;
-  backdrop-filter: blur(4px);
-  animation:subir 2s ease forwards;
-}
-
-@keyframes subir{
-  from{opacity:0; transform:translateY(40px)}
-  to{opacity:1; transform:translateY(0)}
-}
-
-h1{color:#d4af37}
-.btn{
-  display:inline-block;
-  margin:10px;
-  padding:12px 22px;
-  background:#0a8f5c;
-  color:#fff;
-  border-radius:30px;
-  text-decoration:none;
+  width:100%;
+  text-align:center;
+  top:70px;
+  font-size:22px;
   font-weight:bold;
+  color:#2a1c00;
+}
+
+@keyframes flotar{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+}
+
+/* ===== TARJETA ===== */
+.tarjeta{
+  display:none;
+  background:rgba(0,0,0,.45);
+  backdrop-filter: blur(4px);
+  border:2px solid #d4af37;
+  border-radius:20px;
+  padding:25px;
+  max-width:420px;
+  color:white;
+  text-align:center;
+  animation: aparecer 1.5s ease forwards;
+}
+
+@keyframes aparecer{
+  from{opacity:0; transform:scale(.9)}
+  to{opacity:1; transform:scale(1)}
+}
+
+h1{
+  color:#d4af37;
+  margin-bottom:10px;
+}
+
+/* FOTO */
+.foto-vestido{
+  margin:15px 0;
+}
+.foto-vestido img{
+  width:100%;
+  max-height:420px;
+  object-fit:contain;
+  border-radius:15px;
+}
+
+/* TEXTO */
+.mensaje{font-size:15px; margin:10px 0}
+.datos{margin:10px 0; font-weight:bold}
+
+/* BOTONES */
+.botones a{
+  display:inline-block;
+  margin:6px;
+  padding:10px 18px;
+  background:#0f7d5c;
+  color:white;
+  text-decoration:none;
+  border-radius:20px;
+  font-size:14px;
+}
+
+/* COLORES */
+.colores span{
+  display:inline-block;
+  width:14px;height:14px;
+  border-radius:50%;
+  margin:3px;
 }
 
 /* MARIPOSAS */
 .mariposa{
   position:absolute;
-  font-size:24px;
-  animation:volar 12s linear infinite;
+  font-size:22px;
+  animation: volar 8s infinite linear;
 }
-
 @keyframes volar{
   from{transform:translateY(100vh)}
-  to{transform:translateY(-120vh)}
+  to{transform:translateY(-100vh)}
 }
 </style>
 </head>
 
 <body>
 
-<div class="fondo"></div>
+<!-- AUDIO -->
+<audio id="musica" src="campanillas.mp3" preload="auto"></audio>
 
 <!-- SOBRE -->
-<div class="sobre-container" id="sobre">
-  <div class="sobre">
-    <h2>Mis 15 Años</h2>
-  </div>
+<div class="sobre" onclick="abrirSobre()">
+  <span>Mis 15 Años</span>
 </div>
 
 <!-- TARJETA -->
-<div class="tarjeta">
+<div class="tarjeta" id="tarjeta">
   <h1>Laura Valentina</h1>
 
-  <p>
+  <div class="foto-vestido">
+    <img src="vestido-laura.jpg" alt="Vestido Laura Valentina">
+  </div>
+
+  <p class="mensaje">
     Hay momentos que se vuelven eternos cuando se viven con el corazón.
     Hoy inicio una nueva etapa de mi vida y sería un honor contar con tu presencia
     para celebrar esta noche llena de magia, alegría y sueños.
   </p>
 
-  <p><strong>José Rodríguez<br>Ruby González</strong></p>
+  <p><strong>José Rodríguez & Ruby González</strong></p>
 
-  <p><strong>Sábado 21 de marzo de 2026</strong><br>🕓 4:30 p.m.</p>
-
-  <div id="contador"></div>
-
-  <a class="btn" href="https://wa.me/573103289948" target="_blank">
-    Confirmar asistencia 💬
-  </a>
-
-  <a class="btn" href="https://www.google.com/maps?q=4.273662,-74.474662" target="_blank">
-    Ver ubicación 📍
-  </a>
-
-  <p>🎁 Lluvia de sobres</p>
-
-  <p>
-    Colores reservados:
-    🟢 🟡 ⚪ 🔴
+  <p class="datos">
+    📅 Sábado 21 de marzo de 2026<br>
+    ⏰ 4:30 p.m.
   </p>
 
-  <p><em>
+  <p id="contador"></p>
+
+  <div class="botones">
+    <a href="https://wa.me/573103289947" target="_blank">Confirmar asistencia 💬</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=CEDESNID,+Av.+Luis+Carlos+Galan,+Chinauta,+Fusagasugá" target="_blank">Ver ubicación 📍</a>
+  </div>
+
+  <p>🎁 Lluvia de sobres</p>
+  <p>Colores reservados:</p>
+  <div class="colores">
+    <span style="background:green"></span>
+    <span style="background:gold"></span>
+    <span style="background:white"></span>
+    <span style="background:red"></span>
+  </div>
+
+  <p style="margin-top:15px;font-style:italic">
     Gracias por acompañarme en uno de los días más importantes de mi vida.
-  </em></p>
+  </p>
 </div>
 
 <!-- MARIPOSAS -->
 <div class="mariposa" style="left:10%">🦋</div>
-<div class="mariposa" style="left:40%">🦋</div>
-<div class="mariposa" style="left:70%">🦋</div>
+<div class="mariposa" style="left:80%">🦋</div>
 
 <script>
-/* ABRIR SOBRE */
-document.getElementById('sobre').onclick = ()=>{
-  document.getElementById('sobre').classList.add('oculto');
-};
+function abrirSobre(){
+  document.querySelector('.sobre').style.display="none";
+  document.getElementById('tarjeta').style.display="block";
+  const audio=document.getElementById("musica");
+  audio.volume=0.5;
+  audio.play();
+}
 
 /* CONTADOR */
 const evento = new Date("March 21, 2026 16:30:00").getTime();
 setInterval(()=>{
   const ahora = new Date().getTime();
   const d = evento - ahora;
-  const dias = Math.floor(d/(1000*60*60*24));
-  const horas = Math.floor((d/(1000*60*60))%24);
-  const minutos = Math.floor((d/(1000*60))%60);
-  const segundos = Math.floor((d/1000)%60);
-  document.getElementById("contador").innerHTML =
-    `⏳ ${dias}d ${horas}h ${minutos}m ${segundos}s`;
+  if(d>0){
+    const dias=Math.floor(d/(1000*60*60*24));
+    const horas=Math.floor((d%(1000*60*60*24))/(1000*60*60));
+    const min=Math.floor((d%(1000*60*60))/(1000*60));
+    const seg=Math.floor((d%(1000*60))/1000);
+    document.getElementById("contador").innerHTML =
+      `⏳ Faltan ${dias}d ${horas}h ${min}m ${seg}s`;
+  }
 },1000);
 </script>
 
